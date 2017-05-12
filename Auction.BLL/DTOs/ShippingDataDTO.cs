@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auction.DAL.Entities
+namespace Auction.BLL.DTOs
 {
-    public class ShippingData
+    public class ShippingDataDTO
     {
         public int Id { get; set; }
         public string LastName { get; set; }
@@ -14,9 +14,5 @@ namespace Auction.DAL.Entities
         public string Country { get; set; }
         public string City { get; set; }
         public string Adress { get; set; }
-
-        public int? UserId { get; set; }
-        public User Owner { get; set; }
-
     }
 }
