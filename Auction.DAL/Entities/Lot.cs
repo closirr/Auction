@@ -16,6 +16,7 @@ namespace Auction.DAL.Entities
         public DateTime CompletionDate { get; set; }
         public string MainPicturePath { get; set; }
         public List<String> AdditionalPicturesPaths { get; set; }
+        public Status Status { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual List<Bid> Bids { get; set; }
@@ -23,7 +24,15 @@ namespace Auction.DAL.Entities
         public Lot()
         {
             Bids = new List<Bid>();
+            AdditionalPicturesPaths = new List<string>();
+            Status = Status.Active;
         }
+    }
+    public enum Status
+    {
+        Active,
+        Ended,
+        Banned
     }
 
 }

@@ -62,13 +62,22 @@
     <Compile Include="DTOs\LotDTO.cs" />
     <Compile Include="DTOs\ShippingDataDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
+    <Compile Include="Infrastructure\MapperProfile.cs" />
+    <Compile Include="Exceptions\ValidationException.cs" />
+    <Compile Include="Intefraces\ILotService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LotService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Auction.DAL\Auction.DAL.csproj">
+      <Project>{f5a1ad5c-ebea-445b-bbe5-7671a25453e3}</Project>
+      <Name>Auction.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

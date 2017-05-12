@@ -20,8 +20,7 @@ namespace Auction.DAL.UnitsOfWork
 
         public AuctionUnitOfWork(string connectionString)
         {
-            User us = new User();
-            us.
+            db = new AuctionContext(connectionString);
         }
 
         public IRepository<Lot> Lots

@@ -13,7 +13,7 @@ namespace Auction.BLL.DTOs
 
         public  List<LotDTO> Lots { get; set; }
         public  List<BidDTO> Bids { get; set; }
-        public User()
+        public UserDTO()
         {
             Lots = new List<LotDTO>();
             Bids = new List<BidDTO>();

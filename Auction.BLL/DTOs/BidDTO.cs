@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Auction.BLL.DTOs;
 
-namespace Auction.BLL
+namespace Auction.BLL.DTOs
 {
     public class BidDTO
     {
