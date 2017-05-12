@@ -14,8 +14,16 @@ namespace Auction.DAL.Entities
         public string Description { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime CompletionDate { get; set; }
+        public string MainPicturePath { get; set; }
+        public List<String> AdditionalPicturesPaths { get; set; }
 
-        public List<Bid> Bids { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual List<Bid> Bids { get; set; }
+
+        public Lot()
+        {
+            Bids = new List<Bid>();
+        }
     }
 
 }

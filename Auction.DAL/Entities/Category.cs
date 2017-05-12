@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Entities
 {
-    public class User
+    public class Category
     {
-        public DateTime RegistrationDate { get; set; }
-        public ShippingData ShippingData { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         public virtual List<Lot> Lots { get; set; }
-        public virtual List<Bid> Bids { get; set; }
 
-        public User()
+        public Category()
         {
             Lots = new List<Lot>();
-            Bids = new List<Bid>();
         }
+
     }
 }

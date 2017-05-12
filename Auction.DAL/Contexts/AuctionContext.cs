@@ -4,10 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Auction.DAL.Entities;
 
 namespace Auction.DAL.Contexts
 {
-    class AuctionContext:DbContext
+    public class AuctionContext:DbContext
     {
         public AuctionContext()
         {
@@ -24,9 +25,10 @@ namespace Auction.DAL.Contexts
         {
             System.Data.Entity.Database.SetInitializer((new ContextInitialiser()));
         }
-
-        public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Lot> Lots { get; set; }
+        public DbSet<Bid> Bids { get; set; }
+        public DbSet<ShippingData> ShippingDatas { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

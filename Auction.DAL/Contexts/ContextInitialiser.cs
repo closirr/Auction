@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Auction.DAL.Entities;
 
 namespace Auction.DAL.Contexts
 {
