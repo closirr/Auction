@@ -57,7 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Contexts\AuctionContext.cs" />
     <Compile Include="Contexts\ContextInitialiser.cs" />
     <Compile Include="Entities\Bid.cs" />

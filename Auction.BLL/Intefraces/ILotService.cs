@@ -12,11 +12,11 @@ namespace Auction.BLL.Intefraces
     {
         void Create(LotDTO lot);
         void Remove(int? lotId);
-        void MakeABid(LotDTO lot, BidDTO bid);
+        void MakeABid(int? lotId, BidDTO bid);
         LotDTO Get(int? id);
-        void RemoveBid(int? bidId);
+        void RemoveBid(int? lotId, int? bidId);
         IEnumerable<LotDTO> GetAllInCategory(int? categoryId);
-        IEnumerable<LotDTO> GetAll(int? categoryId);
-
+        IEnumerable<LotDTO> GetAll();
+        IEnumerable<LotDTO> GetFirstEarliest(int count);
     }
 }
