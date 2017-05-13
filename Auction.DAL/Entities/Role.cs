@@ -7,8 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Auction.DAL.Entities
 {
-    public class User : IdentityUser
+    public class Role:IdentityRole
     {
-        public virtual UserProfile UserProfile { get; set; }
     }
 }

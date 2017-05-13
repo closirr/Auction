@@ -8,15 +8,11 @@ namespace Auction.BLL.DTOs
 {
     public class UserDTO
     {
-        public DateTime RegistrationDate { get; set; }
-        public ShippingDataDTO ShippingData { get; set; }
-
-        public  List<LotDTO> Lots { get; set; }
-        public  List<BidDTO> Bids { get; set; }
-        public UserDTO()
-        {
-            Lots = new List<LotDTO>();
-            Bids = new List<BidDTO>();
-        }
+        public string Id { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string UserName { get; set; }
+        public string Name { get; set; }
+        public string Role { get; set; }
     }
 }

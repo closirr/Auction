@@ -10,7 +10,7 @@ using Auction.DAL.Repositories;
 
 namespace Auction.DAL.UnitsOfWork
 {
-    class AuctionUnitOfWork:IAuctionUnitOfWork
+    public class AuctionUnitOfWork:IAuctionUnitOfWork
     {
         private AuctionContext db;
         private LotRepository LotRepository;

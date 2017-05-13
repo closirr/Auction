@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Auction.DAL.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Auction.DAL.Contexts
 {
-    public class AuctionContext:DbContext
+    public class AuctionContext: IdentityDbContext<User>
     {
         public AuctionContext()
         {
@@ -17,8 +18,6 @@ namespace Auction.DAL.Contexts
         public AuctionContext(string connectionString)
             : base(connectionString)
         {
-            //string path = ConfigurationSettings.AppSettings["DataDirectory"];
-            //AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
         }
         static AuctionContext()
@@ -29,6 +28,6 @@ namespace Auction.DAL.Contexts
         public DbSet<Lot> Lots { get; set; }
         public DbSet<Bid> Bids { get; set; }
         public DbSet<ShippingData> ShippingDatas { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

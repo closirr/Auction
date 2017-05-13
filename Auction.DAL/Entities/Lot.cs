@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,8 @@ namespace Auction.DAL.Entities
 {
     public class Lot
     {
+        [Key]
+        [ForeignKey("Owner")]
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
@@ -18,6 +22,7 @@ namespace Auction.DAL.Entities
         public List<String> AdditionalPicturesPaths { get; set; }
         public Status Status { get; set; }
 
+        public User Owner { get; set; }
         public virtual Category Category { get; set; }
         public virtual List<Bid> Bids { get; set; }
 

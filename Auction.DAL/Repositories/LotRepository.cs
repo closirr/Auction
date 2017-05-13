@@ -31,6 +31,7 @@ namespace Auction.DAL.Repositories
         public void Create(Lot item)
         {
             db.Lots.Add(item);
+
         }
 
         public void Update(Lot item)
