@@ -19,4 +19,4 @@ namespace Auction.BLL.Infrastructure
         public string Property { get; private set; }
     }
 }
-}
+

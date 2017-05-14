@@ -78,4 +78,4 @@ namespace Auction.BLL.Services
         }
     }
 }
-}
+
