@@ -21,6 +21,7 @@ namespace Auction.BLL.Infrastructure
         public override void Load()
         {
             Bind<IAuctionUnitOfWork>().To<AuctionUnitOfWork>().WithConstructorArgument(connectionString);
+            Bind<IIdentityUnitOfWork>().To<IdentityUnitOfWork>().WithConstructorArgument(connectionString);
 
         }
     }

@@ -15,5 +15,10 @@ namespace Auction.BLL.DTOs
         public ShippingDataDTO ShippingData { get; set; }
 
         public virtual UserDTO Owner { get; set; }
+
+        public UserProfileDTO()
+        {
+            RegistrationDate = DateTime.Now;
+        }
     }
 }

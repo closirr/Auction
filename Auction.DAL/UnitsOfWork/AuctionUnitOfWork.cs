@@ -23,7 +23,7 @@ namespace Auction.DAL.UnitsOfWork
             db = new AuctionContext(connectionString);
         }
 
-        public IRepository<Lot> Lots
+        public IRepository<Lot,string> Lots
         {
             get
             {
@@ -32,7 +32,7 @@ namespace Auction.DAL.UnitsOfWork
                 return LotRepository;
             }
         }
-        public IRepository<Category> Categories
+        public IRepository<Category, int> Categories
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Auction.DAL.UnitsOfWork
                 return CategoryRepository;
             }
         }
-        public IRepository<Bid> Bids
+        public IRepository<Bid, string> Bids
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Auction.DAL.UnitsOfWork
             }
         }
 
-        public IRepository<ShippingData> ShippingDatas
+        public IRepository<ShippingData, string> ShippingDatas
         {
             get
             {

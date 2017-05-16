@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Auction.BLL.DTOs;
 using Auction.BLL.Exceptions;
@@ -11,7 +12,7 @@ using AutoMapper;
 
 namespace Auction.BLL.Services
 {
-    class LotService:ILotService
+    public class LotService:ILotService
     {
         public IAuctionUnitOfWork Database { get; private set; }
 
@@ -23,20 +24,22 @@ namespace Auction.BLL.Services
         }
         public void Create(LotDTO lot)
         {
+            Bid bid = new Bid();
+
             if (lot == null)
                 throw new ArgumentNullException("lot");
             Database.Lots.Create(Mapper.Map<Lot>(lot));
             Database.Save();
         }
 
-        public void Remove(int? lotId)
+        public void Remove(string lotId)
         {
             if(lotId == null)
                 throw new ArgumentNullException("lotId");
-            Database.Lots.Delete(lotId.Value);
+            Database.Lots.Delete(lotId);
         }
 
-        public void MakeABid(int? lotId, BidDTO bid)
+        public void MakeABid(string lotId, BidDTO bid)
         {
             if (bid == null)
                 throw new ArgumentNullException("bid");
@@ -44,39 +47,39 @@ namespace Auction.BLL.Services
                 throw new ArgumentNullException("lotId");
 
 
-            Lot lot = Database.Lots.Get(lotId.Value);
+            Lot lot = Database.Lots.Get(lotId);
             if (lot == null)
-                throw new ItemNotExistInDbException("lot", lotId.Value);
+                throw new ItemNotExistInDbException("lot", lotId.ToString());
             if (lot.Status != Status.Active)
                 throw new InaccessibleLotException("inactive lot", lot.Id);
 
             lot.Bids.Add(Mapper.Map<Bid>(bid));
         }
 
-        public LotDTO Get(int? id)
+        public LotDTO Get(string id)
         {
             if (id == null)
                 throw new ArgumentNullException("id");
             Lot lot = null;
-            lot = Database.Lots.Get(id.Value);
+            lot = Database.Lots.Get(id);
             if (lot == null)
-                throw new ItemNotExistInDbException("lot", id.Value);
+                throw new ItemNotExistInDbException("lot", id.ToString());
             return Mapper.Map<LotDTO>(lot);
         }
 
-        public void RemoveBid(int? lotId, int? bidId)
+        public void RemoveBid(string lotId, string bidId)
         {
             if (lotId == null)
                 throw new ArgumentNullException("lotId");
             if (bidId == null)
                 throw new ArgumentNullException("bidId");
 
-            Lot lot = Database.Lots.Get(lotId.Value);
+            Lot lot = Database.Lots.Get(lotId);
             if (lot == null)
-                throw new ItemNotExistInDbException("lot", lotId.Value);
+                throw new ItemNotExistInDbException("lot", lotId);
             Bid bid = lot.Bids.Find(b => b.Id == bidId);
             if (bid == null)
-                throw new ItemNotExistInDbException("bid", bidId.Value);
+                throw new ItemNotExistInDbException("bid", bidId);
             lot.Bids.Remove(bid);
         }
 
@@ -101,5 +104,16 @@ namespace Auction.BLL.Services
             IEnumerable<Lot> lots = Database.Lots.GetAll().OrderBy(l => l.CreateDate).Take(count);
             return Mapper.Map<IEnumerable<LotDTO>>(lots);
         }
+
+        public IEnumerable<LotDTO> FindByName(string lotName)
+        {
+            if (lotName == null)
+                throw new ArgumentNullException("lotName");
+            IEnumerable<Lot> lots = Database.Lots.GetAll().
+                Where(l => l.Name.Contains(lotName)).Include(l => l.Bids);
+
+            return Mapper.Map<IEnumerable<LotDTO>>(lots);
+        }
+
     }
 }

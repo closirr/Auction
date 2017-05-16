@@ -10,7 +10,7 @@ using Auction.DAL.Interfaces;
 
 namespace Auction.DAL.Repositories
 {
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : IRepository<Category,int>
     {
         private AuctionContext db;
         public CategoryRepository(AuctionContext _db)

@@ -25,6 +25,7 @@ namespace Auction.DAL.Entities
         {
             Lots = new List<Lot>();
             Bids = new List<Bid>();
+            RegistrationDate = DateTime.Now;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -24,24 +25,31 @@ namespace Auction.BLL.Services
 
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
-            User user = await Database.UserManager.FindByEmailAsync(userDto.Email);
-            if (user == null)
+            try
             {
-                user = new User { Email = userDto.Email, UserName = userDto.Email };
-                var result = await Database.UserManager.CreateAsync(user, userDto.Password);
-                if (result.Errors.Any())
-                    return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
-                // добавляем роль
-                await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                // создаем профиль клиента
-                UserProfile clientProfile = new UserProfile { Id = user.Id};
-                Database.UserProfile.Create(clientProfile);
-                await Database.SaveAsync();
-                return new OperationDetails(true, "Регистрация успешно пройдена", "");
+                User user = await Database.UserManager.FindByEmailAsync(userDto.Email);
+                if (user == null)
+                {
+                    user = new User {Email = userDto.Email, UserName = userDto.Email};
+                    var result = await Database.UserManager.CreateAsync(user, userDto.Password);
+                    if (result.Errors.Any())
+                        return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
+                    // добавляем роль
+                    await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                    // создаем профиль клиента
+                    UserProfile clientProfile = new UserProfile {Id = user.Id};
+                    Database.UserProfile.Create(clientProfile);
+                    await Database.SaveAsync();
+                    return new OperationDetails(true, "Регистрация успешно пройдена", "");
+                }
+                else
+                {
+                    return new OperationDetails(false, "Пользователь с таким логином уже существует", "Email");
+                }
             }
-            else
+            catch (EntityException ex)
             {
-                return new OperationDetails(false, "Пользователь с таким логином уже существует", "Email");
+                throw new Exception(ex.Message);
             }
         }
 
@@ -62,7 +70,7 @@ namespace Auction.BLL.Services
         {
             foreach (string roleName in roles)
             {
-                var role = await Database.RoleManager.FindByNameAsync(roleName);
+                Role role = await Database.RoleManager.FindByNameAsync(roleName);
                 if (role == null)
                 {
                     role = new Role { Name = roleName };

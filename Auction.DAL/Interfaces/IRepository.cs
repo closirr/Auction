@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Interfaces
 {
-    public interface IRepository<T> where T:class
+    public interface IRepository<T,TInput> where T:class
     {
         IQueryable<T> GetAll();
-        T Get(int id);
+        T Get(TInput id);
         void Create(T item);
         void Update(T item);
-        void Delete(int id);
+        void Delete(TInput id);
     }
 }

@@ -10,7 +10,7 @@ using Auction.DAL.Interfaces;
 
 namespace Auction.DAL.Repositories
 {
-    public class BidRepository : IRepository<Bid>
+    public class BidRepository : IRepository<Bid, string>
     {
         private AuctionContext db;
         public BidRepository(AuctionContext _db)
@@ -23,7 +23,7 @@ namespace Auction.DAL.Repositories
             return db.Bids;
         }
 
-        public Bid Get(int id)
+        public Bid Get(string id)
         {
             return db.Bids.Find(id);
         }
@@ -38,7 +38,7 @@ namespace Auction.DAL.Repositories
             db.Entry(item).State = EntityState.Modified;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             Bid item = db.Bids.Find(id);
             if (item != null)

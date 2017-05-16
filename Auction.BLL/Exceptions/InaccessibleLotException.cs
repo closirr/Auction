@@ -8,9 +8,9 @@ namespace Auction.BLL.Exceptions
 {
     class InaccessibleLotException:Exception
     {
-        public int LotId { get; private set; }
+        public string LotId { get; private set; }
 
-        public InaccessibleLotException(string message, int _lotId):base(message)
+        public InaccessibleLotException(string message, string _lotId):base(message)
         {
             LotId = _lotId;
         }

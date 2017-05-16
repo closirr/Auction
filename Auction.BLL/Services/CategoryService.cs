@@ -14,7 +14,8 @@ using AutoMapper;
 
 namespace Auction.BLL.Services
 {
-    class CategoryService:ICategoryService
+    
+    public class CategoryService:ICategoryService
     {
         public IAuctionUnitOfWork Database { get; private set; }
 
@@ -36,11 +37,11 @@ namespace Auction.BLL.Services
                 throw new ArgumentNullException("categoryId");
             Category category = Database.Categories.Get(categoryId.Value);
             if(category == null)
-                throw new ItemNotExistInDbException("category", categoryId.Value);
+                throw new ItemNotExistInDbException("category", categoryId.Value.ToString());
             return Mapper.Map<CategoryDTO>(category);
         }
 
-        public void Create(Category category)
+        public void Create(CategoryDTO category)
         {
             if (category == null)
                 throw new ArgumentNullException("category");
@@ -52,7 +53,7 @@ namespace Auction.BLL.Services
         {
             if (categoryId == null)
                 throw new ArgumentNullException("categoryId");
-            Database.Lots.Delete(categoryId.Value);
+            Database.Categories.Delete(categoryId.Value);
         }
     }
 }

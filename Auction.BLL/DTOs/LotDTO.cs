@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Auction.DAL.Entities;
 
 namespace Auction.BLL.DTOs
 {
@@ -18,13 +19,17 @@ namespace Auction.BLL.DTOs
         public string MainPicturePath { get; set; }
         public List<String> AdditionalPicturesPaths { get; set; }
         public StatusDTO Status { get; set; }
-        public  CategoryDTO Category { get; set; }
+
+        public UserDTO Owner { get; set; }
+        public CategoryDTO Category { get; set; }
         public  List<BidDTO> Bids { get; set; }
 
         public LotDTO()
         {
             AdditionalPicturesPaths = new List<string>();
             Bids = new List<BidDTO>();
+            CreateDate = DateTime.Now;
+            CompletionDate = DateTime.Now;
         }
 
         public enum StatusDTO
@@ -33,5 +38,7 @@ namespace Auction.BLL.DTOs
             Ended,
             Banned
         }
+
+
     }
 }

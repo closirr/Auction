@@ -8,11 +8,11 @@ using Auction.DAL.Entities;
 
 namespace Auction.BLL.Intefraces
 {
-    interface ICategoryService
+    public interface ICategoryService
     {
         IEnumerable<CategoryDTO> GetAll();
         CategoryDTO Get(int? categoryId);
-        void Create(Category category);
+        void Create(CategoryDTO category);
         void Remove(int? categoryId);
     }
 }

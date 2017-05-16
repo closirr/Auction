@@ -12,7 +12,7 @@ namespace Auction.DAL.Entities
     {
         [Key]
         [ForeignKey("Owner")]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
@@ -31,6 +31,9 @@ namespace Auction.DAL.Entities
             Bids = new List<Bid>();
             AdditionalPicturesPaths = new List<string>();
             Status = Status.Active;
+            CreateDate = DateTime.Now;
+            CompletionDate = DateTime.Now;
+
         }
     }
     public enum Status

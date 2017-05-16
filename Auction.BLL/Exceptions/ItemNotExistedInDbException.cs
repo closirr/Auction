@@ -8,8 +8,8 @@ namespace Auction.BLL.Exceptions
 {
     class ItemNotExistInDbException:Exception
     {
-        public int ItemId { get; set; }
-        public ItemNotExistInDbException(string message, int itemId) : base(message)
+        public string ItemId { get; set; }
+        public ItemNotExistInDbException(string message, string itemId) : base(message)
         {
             ItemId = itemId;
         }

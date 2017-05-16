@@ -14,7 +14,13 @@ namespace Auction.App_Start
 {
     public class Startup
     {
-        IServiceCreator serviceCreator = new ServiceCreator();
+        private IServiceCreator _serviceCreator;
+
+        public Startup()
+        {
+            _serviceCreator = new ServiceCreator();
+        }
+
         public void Configuration(IAppBuilder app)
         {
             app.CreatePerOwinContext<IUserService>(CreateUserService);
@@ -27,7 +33,7 @@ namespace Auction.App_Start
 
         private IUserService CreateUserService()
         {
-            return serviceCreator.CreateUserService("DefaultConnection");
+            return _serviceCreator.CreateUserService("DefaultConnection");
         }
     }
 }

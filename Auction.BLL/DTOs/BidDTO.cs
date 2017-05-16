@@ -10,5 +10,11 @@ namespace Auction.BLL.DTOs
 
         public  LotDTO Lot { get; set; }
         public  UserDTO Owner { get; set; }
+
+        public BidDTO()
+        {
+            CreateDate = DateTime.Now;
+
+        }
     }
 }

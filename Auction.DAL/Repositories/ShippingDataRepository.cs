@@ -10,7 +10,7 @@ using Auction.DAL.Interfaces;
 
 namespace Auction.DAL.Repositories
 {
-    public class ShippingDataRepository : IRepository<ShippingData>
+    public class ShippingDataRepository : IRepository<ShippingData, string>
     {
         private AuctionContext db;
         public ShippingDataRepository(AuctionContext _db)
@@ -23,7 +23,7 @@ namespace Auction.DAL.Repositories
             return db.ShippingDatas;
         }
 
-        public ShippingData Get(int id)
+        public ShippingData Get(string id)
         {
             return db.ShippingDatas.Find(id);
         }
@@ -38,7 +38,7 @@ namespace Auction.DAL.Repositories
             db.Entry(item).State = EntityState.Modified;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             ShippingData item = db.ShippingDatas.Find(id);
             if (item != null)

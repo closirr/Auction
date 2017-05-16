@@ -10,9 +10,9 @@ namespace Auction.DAL.Interfaces
     public interface IUserProfileManager:IDisposable
     {
         IQueryable<UserProfile> GetAll();
-        UserProfile Get(int id);
+        UserProfile Get(string id);
         void Create(UserProfile item);
         void Update(UserProfile item);
-        void Delete(int id);
+        void Delete(string id);
     }
 }

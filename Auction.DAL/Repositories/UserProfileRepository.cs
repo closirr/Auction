@@ -23,7 +23,7 @@ namespace Auction.DAL.Repositories
             return db.UserProfiles;
         }
 
-        public UserProfile Get(int id)
+        public UserProfile Get(string id)
         {
             return db.UserProfiles.Find(id);
         }
@@ -38,7 +38,7 @@ namespace Auction.DAL.Repositories
             db.Entry(item).State = EntityState.Modified;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             UserProfile item = db.UserProfiles.Find(id);
             if (item != null)
