@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Auction.BLL.Exceptions
 {
-    class ItemNotExistInDbException:Exception
+    public class ItemNotExistInDbException:Exception
     {
         public string ItemId { get; set; }
         public ItemNotExistInDbException(string message, string itemId) : base(message)

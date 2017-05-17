@@ -18,6 +18,14 @@ namespace Auction.BLL.Infrastructure
             CreateMap<Category , CategoryDTO>();
             CreateMap<ShippingData, ShippingDataDTO>();
             CreateMap<Lot, LotDTO>();
+
+            CreateMap<LotDTO, Lot>()
+                .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => Mapper.Map<User>(src.Owner)))
+                .ForMember(dest => dest.Bids, opt => opt.MapFrom(src => Mapper.Map <IEnumerable<Bid>>(src.Bids)))
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => Mapper.Map<Category>(src.Category)));
+            CreateMap<BidDTO, Bid>();
+            CreateMap<CategoryDTO, Category>();
+
         }
     }
 }

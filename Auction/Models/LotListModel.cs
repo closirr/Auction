@@ -15,7 +15,7 @@ namespace Auction.Models
         public DateTime CompletionDate { get; set; }
         public string Name { get; set; }
 
-
+         
   //      public TYPE Type { get; set; }
 
     }

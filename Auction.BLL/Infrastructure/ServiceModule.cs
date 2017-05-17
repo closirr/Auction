@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Auction.DAL.Interfaces;
 using Auction.DAL.UnitsOfWork;
+using AutoMapper;
 using Ninject.Modules;
 
 namespace Auction.BLL.Infrastructure
 {
-    class ServiceModule:NinjectModule
+    public class ServiceModule:NinjectModule
     {
         private string connectionString;
 
@@ -22,7 +23,7 @@ namespace Auction.BLL.Infrastructure
         {
             Bind<IAuctionUnitOfWork>().To<AuctionUnitOfWork>().WithConstructorArgument(connectionString);
             Bind<IIdentityUnitOfWork>().To<IdentityUnitOfWork>().WithConstructorArgument(connectionString);
-
+            Mapper.Initialize(cfg => cfg.AddProfiles("Auction.BLL"));
         }
     }
 }

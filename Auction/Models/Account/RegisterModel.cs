@@ -17,9 +17,7 @@ namespace Auction.Models.Account
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-        [Required]
-        public string Address { get; set; }
-        [Required]
+     [Required]
         public string Name { get; set; }
     }
 }

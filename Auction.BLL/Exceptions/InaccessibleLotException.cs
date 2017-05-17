@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Auction.BLL.Exceptions
 {
-    class InaccessibleLotException:Exception
+    public class InaccessibleLotException:Exception
     {
         public string LotId { get; private set; }
 

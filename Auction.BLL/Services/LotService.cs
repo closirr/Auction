@@ -9,25 +9,42 @@ using Auction.BLL.Intefraces;
 using Auction.DAL.Entities;
 using Auction.DAL.Interfaces;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 
 namespace Auction.BLL.Services
 {
     public class LotService:ILotService
     {
-        public IAuctionUnitOfWork Database { get; private set; }
+        public IAuctionUnitOfWork Database { get;  }
+        public IIdentityUnitOfWork IdentityDb { get; }
 
-        public LotService(IAuctionUnitOfWork database)
+        public LotService(IAuctionUnitOfWork database, IIdentityUnitOfWork identityDb)
         {
             if (database == null)
                 throw new ArgumentNullException("database");
+
+            if (identityDb == null)
+                throw new ArgumentNullException("identityDb");
+            IdentityDb = identityDb;
             Database = database;
         }
-        public void Create(LotDTO lot)
+        public void Create(string userId, LotDTO lotDTO)
         {
-            Bid bid = new Bid();
+            User user = IdentityDb.UserManager.FindById(userId);
+            if (user == null)
+                throw new ItemNotExistInDbException("Cannot find user", userId);
+            if (lotDTO == null)
+                throw new ArgumentNullException("lotDTO");
+            //lotDTO.Owner = Mapper.Map<UserDTO>(user);
+            lotDTO.Id = userId;
+            lotDTO.Owner = new UserDTO();
+            Lot lotTest = new Lot() {Id="22"};
+            lotDTO.Category = new CategoryDTO();
+          //  Mapper.Initialize(cfg => cfg.CreateMap<LotDTO, Lot>());
+          //  Lot lot  = Mapper.Map<LotDTO, Lot>(lotDTO);
+            Lot lot = Mapper.Map<LotDTO, Lot>(lotDTO);
 
-            if (lot == null)
-                throw new ArgumentNullException("lot");
+            lot.Owner = user;
             Database.Lots.Create(Mapper.Map<Lot>(lot));
             Database.Save();
         }
@@ -86,7 +103,7 @@ namespace Auction.BLL.Services
         public IEnumerable<LotDTO> GetAllInCategory(int? categoryId) //TODO Test SQL query performance
         {
             if (categoryId == null)
-                throw new ArgumentNullException("id");
+                throw new ArgumentNullException("categoryId");
             IEnumerable<Lot> lots = Database.Lots.GetAll().
                 Where(l => l.Category.Id == categoryId);
             

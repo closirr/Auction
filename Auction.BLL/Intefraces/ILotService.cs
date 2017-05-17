@@ -10,7 +10,7 @@ namespace Auction.BLL.Intefraces
 {
     public interface ILotService
     {
-        void Create(LotDTO lot);
+        void Create(string userId, LotDTO lot);
         void Remove(string lotId);
         void MakeABid(string lotId, BidDTO bid);
         LotDTO Get(string id);

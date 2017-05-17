@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Auction.BLL.DTOs;
 using Auction.Models;
+using Auction.Models.Lot;
 using AutoMapper;
 
 namespace Auction.Util
@@ -21,6 +22,7 @@ namespace Auction.Util
                 .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.Owner.Id))
                 .ForMember(dest => dest.BidCount, opt => opt.MapFrom(src => src.Bids.Count))
                 .ForMember(dest => dest.CurrentBidId,opt => opt.MapFrom(src => src.Bids.OrderBy(o => o.CreateDate).FirstOrDefault()));
+            CreateMap<LotCreateModel, LotDTO>();
         }
     }
 }

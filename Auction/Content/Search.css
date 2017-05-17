@@ -1,0 +1,24 @@
+/* nav bar search box - drop down menu button */
+.navbar .navbar-search .dropdown-menu { min-width: 25px; }
+.dropdown-menu .label-icon { margin-left: 5px; }
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}
+.search input[type = "text"] {min-width: 600px;
+    color: red; float: left;}
+
+.search .dropdown-toggle {min-width: 100px;
+    color: red; }
+.search .input-group-btn {min-width: 100%;margin-left: 1000px;
+    color: red; }
+.search .btn {min-width: 50px;align-content: center;
+    float: right;
+    color: red; }
+
+#button-search {
+    min-width: 50px;float: right;
+    color: green; 
+}
+

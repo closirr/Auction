@@ -29,5 +29,7 @@ namespace Auction.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Auction.Models.Lot.LotCreateModel> LotCreateModels { get; set; }
     }
 }

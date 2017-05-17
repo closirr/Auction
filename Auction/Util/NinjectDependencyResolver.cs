@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Auction.BLL.Intefraces;
 using Auction.BLL.Services;
+using AutoMapper;
 using Ninject;
 
 namespace Auction.Util
@@ -30,7 +31,9 @@ namespace Auction.Util
         {
             kernel.Bind<ICategoryService>().To<CategoryService>();
             kernel.Bind<ILotService>().To<LotService>();
-            kernel.Bind<IUserService>().To<UserService>(); 
+            kernel.Bind<IUserService>().To<UserService>();
+            Mapper.Initialize(cfg => cfg.AddProfiles("Auction"));
+
         }
 
     }

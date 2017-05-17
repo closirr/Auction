@@ -33,7 +33,7 @@ namespace Auction.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            return View(new LoginModel());
         }
 
         [HttpPost]
@@ -41,7 +41,7 @@ namespace Auction.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login(LoginModel model)
         {
-            await SetInitialDataAsync();
+           // await SetInitialDataAsync();
 
             if (ModelState.IsValid)
             {
@@ -57,7 +57,10 @@ namespace Auction.Controllers
                 }
                 if (claim == null)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                    ModelState.AddModelError("", "Wrong login or password");
+                    model.IsLoginDropDownOpened = true;
+                    model.Password = "";
+                    model.ErrorMessage = "Wrong login or password";
                 }
                 else
                 {
@@ -66,7 +69,7 @@ namespace Auction.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-            return View(model);
+            return RedirectToAction("Index", "Home",model);
         }
 
         public ActionResult Logout()
@@ -77,16 +80,16 @@ namespace Auction.Controllers
 
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            await SetInitialDataAsync();
+           // await SetInitialDataAsync();
 
-            if (ModelState.IsValid)
+             if (ModelState.IsValid)
             {
                 UserDTO userDto = new UserDTO
                 {
@@ -113,7 +116,7 @@ namespace Auction.Controllers
                 Email = "somemail@mail.ru",
                 UserName = "somemail@mail.ru",
                 Password = "ad46D_ewr3",
-                Name = "Семен Семенович Горбунков",
+                Name = "Admin",
                 Role = "admin",
                 
             }, new List<string> {"user", "admin"});

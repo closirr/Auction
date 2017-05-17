@@ -4,7 +4,7 @@ namespace Auction.BLL.DTOs
 {
     public class BidDTO
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public DateTime CreateDate { get; set; }
         public decimal Price { get; set; }
 
