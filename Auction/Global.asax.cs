@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Auction.Util;
+using AutoMapper;
 
 namespace Auction
 {
@@ -16,6 +18,14 @@ namespace Auction
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfiles("Auction.BLL");
+                cfg.AddProfiles("Auction");
+            });
+
+          
         }
     }
 }

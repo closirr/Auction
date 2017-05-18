@@ -23,7 +23,7 @@ namespace Auction.BLL.Infrastructure
         {
             Bind<IAuctionUnitOfWork>().To<AuctionUnitOfWork>().WithConstructorArgument(connectionString);
             Bind<IIdentityUnitOfWork>().To<IdentityUnitOfWork>().WithConstructorArgument(connectionString);
-            Mapper.Initialize(cfg => cfg.AddProfiles("Auction.BLL"));
+
         }
     }
 }

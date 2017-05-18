@@ -21,7 +21,7 @@ namespace Auction.DAL.Entities
         public int LotId { get; set; }
         public virtual Lot Lot { get; set; }
 
-        public virtual User Owner { get; set; }
+        public virtual UserProfile Owner { get; set; }
 
         public Bid()
         {

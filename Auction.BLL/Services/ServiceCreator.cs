@@ -12,7 +12,7 @@ namespace Auction.BLL.Services
     {
         public IUserService CreateUserService(string connection)
         {
-            return new UserService(new IdentityUnitOfWork(connection));
+            return new UserService(new IdentityUnitOfWork(connection), new AuctionUnitOfWork(connection));
         }
     }
 }

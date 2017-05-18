@@ -9,7 +9,7 @@ namespace Auction.BLL.DTOs
         public decimal Price { get; set; }
 
         public  LotDTO Lot { get; set; }
-        public  UserDTO Owner { get; set; }
+        public  UserProfileDTO Owner { get; set; }
 
         public BidDTO()
         {

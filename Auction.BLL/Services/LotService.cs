@@ -35,16 +35,17 @@ namespace Auction.BLL.Services
                 throw new ItemNotExistInDbException("Cannot find user", userId);
             if (lotDTO == null)
                 throw new ArgumentNullException("lotDTO");
-            //lotDTO.Owner = Mapper.Map<UserDTO>(user);
-            lotDTO.Id = userId;
-            lotDTO.Owner = new UserDTO();
-            Lot lotTest = new Lot() {Id="22"};
             lotDTO.Category = new CategoryDTO();
-          //  Mapper.Initialize(cfg => cfg.CreateMap<LotDTO, Lot>());
-          //  Lot lot  = Mapper.Map<LotDTO, Lot>(lotDTO);
-            Lot lot = Mapper.Map<LotDTO, Lot>(lotDTO);
+            Mapper.Map<User>(new UserDTO());
 
-            lot.Owner = user;
+            Mapper.Map<Category>(new CategoryDTO());
+            Mapper.Map<Bid>(new BidDTO());
+            
+            Mapper.Map<Status>(new StatusDTO());
+            lotDTO.Owner = use
+            Lot lot = Mapper.Map<Lot>(lotDTO);
+
+            //lot.Owner = new User();
             Database.Lots.Create(Mapper.Map<Lot>(lot));
             Database.Save();
         }
@@ -127,7 +128,7 @@ namespace Auction.BLL.Services
             if (lotName == null)
                 throw new ArgumentNullException("lotName");
             IEnumerable<Lot> lots = Database.Lots.GetAll().
-                Where(l => l.Name.Contains(lotName)).Include(l => l.Bids);
+                Where(l => l.Name.Contains(lotName)).Include(l => l.Bids).ToList();
 
             return Mapper.Map<IEnumerable<LotDTO>>(lots);
         }

@@ -11,8 +11,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/Layout.css")
+    @*@Styles.Render("~/Content/bootstrap-combobox.css")*@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js") 
-
 </head>
 <body>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
@@ -88,6 +88,7 @@
                 {
                     @Html.Partial("_LoginPartial", new LoginModel())
                 }
+                @Html.ActionLink("Sell now" , "DbError", "Error",routeValues:null ,htmlAttributes: new {@class = "btn btn - block" })
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>

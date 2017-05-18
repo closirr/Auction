@@ -13,6 +13,7 @@ namespace Auction.DAL.Interfaces
         IRepository<Category,int> Categories { get; }
         IRepository<Bid, string> Bids { get; }
         IRepository<ShippingData, string> ShippingDatas { get; }
+        IUserProfileManager UserProfile { get; }
 
         void Save();
     }

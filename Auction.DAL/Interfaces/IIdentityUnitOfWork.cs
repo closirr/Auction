@@ -11,7 +11,6 @@ namespace Auction.DAL.Interfaces
     {
         ApplicationUserManager UserManager { get; }
         ApplicationRoleManager RoleManager { get; }
-        IUserProfileManager UserProfile { get; }
 
         Task SaveAsync();
     }

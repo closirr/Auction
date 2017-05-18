@@ -7,7 +7,7 @@ using Auction.DAL.Entities;
 
 namespace Auction.BLL.DTOs
 {
-    class UserProfileDTO
+    public class UserProfileDTO
     {
         public string Id { get; set; }
 

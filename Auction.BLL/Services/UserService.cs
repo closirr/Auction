@@ -16,30 +16,33 @@ namespace Auction.BLL.Services
 {
     public class UserService:IUserService
     {
-        IIdentityUnitOfWork Database { get; set; }
+        IIdentityUnitOfWork DbIdentity { get; set; }
+        IAuctionUnitOfWork DbAuction { get; set; }
 
-        public UserService(IIdentityUnitOfWork uow)
+
+        public UserService(IIdentityUnitOfWork Iuow, IAuctionUnitOfWork Auow)
         {
-            Database = uow;
+            DbIdentity = Iuow;
+            DbAuction = Auow;
         }
 
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
             try
             {
-                User user = await Database.UserManager.FindByEmailAsync(userDto.Email);
+                User user = await DbIdentity.UserManager.FindByEmailAsync(userDto.Email);
                 if (user == null)
                 {
                     user = new User {Email = userDto.Email, UserName = userDto.Email};
-                    var result = await Database.UserManager.CreateAsync(user, userDto.Password);
+                    var result = await DbIdentity.UserManager.CreateAsync(user, userDto.Password);
                     if (result.Errors.Any())
                         return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
                     // добавляем роль
-                    await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                    await DbIdentity.UserManager.AddToRoleAsync(user.Id, userDto.Role);
                     // создаем профиль клиента
                     UserProfile clientProfile = new UserProfile {Id = user.Id};
-                    Database.UserProfile.Create(clientProfile);
-                    await Database.SaveAsync();
+                    DbAuction.UserProfile.Create(clientProfile);
+                    await DbIdentity.SaveAsync();
                     return new OperationDetails(true, "Регистрация успешно пройдена", "");
                 }
                 else
@@ -57,10 +60,10 @@ namespace Auction.BLL.Services
         {
             ClaimsIdentity claim = null;
             // находим пользователя
-            User user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
+            User user = await DbIdentity.UserManager.FindAsync(userDto.Email, userDto.Password);
             // авторизуем его и возвращаем объект ClaimsIdentity
             if (user != null)
-                claim = await Database.UserManager.CreateIdentityAsync(user,
+                claim = await DbIdentity.UserManager.CreateIdentityAsync(user,
                     DefaultAuthenticationTypes.ApplicationCookie);
             return claim;
         }
@@ -70,11 +73,11 @@ namespace Auction.BLL.Services
         {
             foreach (string roleName in roles)
             {
-                Role role = await Database.RoleManager.FindByNameAsync(roleName);
+                Role role = await DbIdentity.RoleManager.FindByNameAsync(roleName);
                 if (role == null)
                 {
                     role = new Role { Name = roleName };
-                    await Database.RoleManager.CreateAsync(role);
+                    await DbIdentity.RoleManager.CreateAsync(role);
                 }
             }
             await Create(adminDto);
@@ -82,7 +85,7 @@ namespace Auction.BLL.Services
 
         public void Dispose()
         {
-            Database.Dispose();
+            DbIdentity.Dispose();
         }
     }
 }

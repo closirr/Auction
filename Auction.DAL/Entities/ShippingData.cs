@@ -19,7 +19,7 @@ namespace Auction.DAL.Entities
         public string City { get; set; }
         public string Adress { get; set; }
          
-        public User Owner { get; set; } //TODO check if this will be deleted if owner deleted
+        public UserProfile Owner { get; set; } //TODO check if this will be deleted if owner deleted
 
     }
 }

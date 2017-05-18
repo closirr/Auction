@@ -31,9 +31,7 @@ namespace Auction.Util
         {
             kernel.Bind<ICategoryService>().To<CategoryService>();
             kernel.Bind<ILotService>().To<LotService>();
-            kernel.Bind<IUserService>().To<UserService>();
-            Mapper.Initialize(cfg => cfg.AddProfiles("Auction"));
-
+            //kernel.Bind<IUserService>().To<UserService>();
         }
 
     }

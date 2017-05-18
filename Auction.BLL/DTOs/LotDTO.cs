@@ -20,7 +20,8 @@ namespace Auction.BLL.DTOs
         public List<String> AdditionalPicturesPaths { get; set; }
         public StatusDTO Status { get; set; }
 
-        public UserDTO Owner { get; set; }
+        public int IdOwner { get; set; }
+        public UserProfileDTO Owner { get; set; }
         public CategoryDTO Category { get; set; }
         public  List<BidDTO> Bids { get; set; }
 
@@ -31,14 +32,11 @@ namespace Auction.BLL.DTOs
             CreateDate = DateTime.Now;
             CompletionDate = DateTime.Now;
         }
-
-        public enum StatusDTO
-        {
-            Active,
-            Ended,
-            Banned
-        }
-
-
+    }
+    public enum StatusDTO
+    {
+        Active,
+        Ended,
+        Banned
     }
 }

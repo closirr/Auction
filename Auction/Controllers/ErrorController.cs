@@ -9,7 +9,7 @@ namespace Auction.Controllers
     public class ErrorController : Controller
     {
         [HttpGet]
-        public ActionResult DbError(string error)
+        public ActionResult DbError(string error = "")
         {
             return View(error);
         }

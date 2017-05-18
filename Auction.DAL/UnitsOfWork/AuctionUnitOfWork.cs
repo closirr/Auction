@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace Auction.DAL.UnitsOfWork
         private CategoryRepository CategoryRepository;
         private BidRepository BidRepository;
         private ShippingDataRepository ShippingDataRepository;
+        private IUserProfileManager UserProfileRepository;
+
 
         public AuctionUnitOfWork(string connectionString)
         {
@@ -61,12 +64,31 @@ namespace Auction.DAL.UnitsOfWork
             }
         }
 
+        public IUserProfileManager UserProfile
+        {
+            get
+            {
+                if (UserProfileRepository == null)
+                    UserProfileRepository = new UserProfileRepository(db);
+                return UserProfileRepository;
+            }
+        }
+
+
+
 
 
         public void Save()
         {
-            db.SaveChanges();
-        }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw new Exception(ex.Message + ex.EntityValidationErrors);
+            }
+    }
 
         public void Dispose()
         {

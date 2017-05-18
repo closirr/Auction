@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +18,12 @@ namespace Auction.DAL.UnitsOfWork
         private AuctionContext database;
         private ApplicationUserManager userManager;
         private ApplicationRoleManager roleManager;
-        private IUserProfileManager userProfile;
 
         public IdentityUnitOfWork(string connectionString)
         {
             database = new AuctionContext(connectionString);
             userManager = new ApplicationUserManager(new UserStore<User>(database));
             roleManager = new ApplicationRoleManager(new RoleStore<Role>(database));
-            userProfile = new UserProfileRepository(database);
         }
 
         public ApplicationUserManager UserManager
@@ -37,14 +36,17 @@ namespace Auction.DAL.UnitsOfWork
             get { return roleManager; }
         }
 
-        public IUserProfileManager UserProfile
-        {
-            get { return userProfile; }
-        }
-
         public async Task SaveAsync()
         {
-            await database.SaveChangesAsync();
+            try
+            {
+
+                await database.SaveChangesAsync();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw new Exception(ex.Message + ex.EntityValidationErrors);
+            }
         }
         public void Dispose()
         {

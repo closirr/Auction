@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using Auction.BLL.DTOs;
@@ -9,6 +11,7 @@ using Auction.Models.Lot;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Auction.BLL.Exceptions;
+using Auction.Filters;
 
 namespace Auction.Controllers
 {
@@ -39,11 +42,8 @@ namespace Auction.Controllers
                 var models = lotNames.Where(a => a.Contains(term))
                     .Select(a => new {value = a})
                     .Distinct();
-                IEnumerable<string> lotNamesTest = new List<string>() { "a", "b", "c", "d" }; //for test
-                var models2 = lotNamesTest.Where(a => a.Contains(term))
-                    .Select(a => new { value = a })
-                    .Distinct();
-                return Json(models2, JsonRequestBehavior.AllowGet);
+               
+                return Json(models, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -57,11 +57,20 @@ namespace Auction.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View(new LotCreateModel());
+            LotCreateModel lotModel = new LotCreateModel() { Description = "asf", MainPicturePath = "asf", Name = "asf", Price = 12 };
+            lotModel.Datas.AddRange( new List<SelectListItem> {
+                new SelectListItem() {Text = "3 days", Value = "3"},
+                new SelectListItem() {Text = "7 days", Value = "7"},
+                new SelectListItem() {Text = "14 days", Value = "14"},
+                new SelectListItem() {Text = "31 days", Value = "31"}
+                }
+                );
+            return View(lotModel);
         }
 
         [HttpPost]
         [Authorize]
+     //   [TimeExpiriedException]
         [ValidateAntiForgeryToken]
         public ActionResult Create(LotCreateModel model)
         {
@@ -71,7 +80,6 @@ namespace Auction.Controllers
                 {
                     LotDTO lot = Mapper.Map<LotDTO>(model);
                     lotService.Create(User.Identity.GetUserId(), Mapper.Map<LotDTO>(model));
-                    ViewBag.Success = "Comment was successfully added";
                     ModelState.Clear();
                 }
                 catch (ItemNotExistInDbException)
