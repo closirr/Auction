@@ -42,7 +42,7 @@ namespace Auction.BLL.Services
             Mapper.Map<Bid>(new BidDTO());
             
             Mapper.Map<Status>(new StatusDTO());
-            lotDTO.Owner = use
+            lotDTO.IdOwner = userId;
             Lot lot = Mapper.Map<Lot>(lotDTO);
 
             //lot.Owner = new User();

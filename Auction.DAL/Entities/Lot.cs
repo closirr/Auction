@@ -20,7 +20,7 @@ namespace Auction.DAL.Entities
         public List<String> AdditionalPicturesPaths { get; set; }
         public Status Status { get; set; }
 
-        public int IdOwner { get; set; }
+        public string IdOwner { get; set; }
         public UserProfile Owner { get; set; }
         public virtual Category Category { get; set; }
         public virtual List<Bid> Bids { get; set; }
