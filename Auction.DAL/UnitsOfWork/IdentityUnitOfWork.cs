@@ -22,6 +22,7 @@ namespace Auction.DAL.UnitsOfWork
         public IdentityUnitOfWork(string connectionString)
         {
             database = new AuctionContext(connectionString);
+            database.Database.CommandTimeout = 180;
             userManager = new ApplicationUserManager(new UserStore<User>(database));
             roleManager = new ApplicationRoleManager(new RoleStore<Role>(database));
         }

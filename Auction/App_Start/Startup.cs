@@ -27,7 +27,7 @@ namespace Auction.App_Start
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Home/Index"),
+                LoginPath = new PathString("/Account/NotAutenticated"),
             });
         }
 

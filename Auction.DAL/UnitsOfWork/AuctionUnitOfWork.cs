@@ -24,9 +24,10 @@ namespace Auction.DAL.UnitsOfWork
         public AuctionUnitOfWork(string connectionString)
         {
             db = new AuctionContext(connectionString);
+            db.Database.CommandTimeout = 180;
         }
 
-        public IRepository<Lot,string> Lots
+        public IRepository<Lot,int> Lots
         {
             get
             {
@@ -44,7 +45,7 @@ namespace Auction.DAL.UnitsOfWork
                 return CategoryRepository;
             }
         }
-        public IRepository<Bid, string> Bids
+        public IRepository<Bid, int> Bids
         {
             get
             {

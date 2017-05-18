@@ -11,6 +11,7 @@ namespace Auction.Models.Lot
     public class LotCreateModel
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Required")]
         [MinLength(6, ErrorMessage = "Need to be more than 5 symbols")]
         public string Name { get; set; }
@@ -21,10 +22,10 @@ namespace Auction.Models.Lot
         [Required(ErrorMessage = "Required")]
         [MinLength(6, ErrorMessage = "Need to be more than 10 symbols, some write information about your lot")]
         public string Description { get; set; }
+
         [Required]
         public string TimeToComplete { get; set; }
 
-      
         public List<SelectListItem> Datas { get; set; }
 
         public string MainPicturePath { get; set; }

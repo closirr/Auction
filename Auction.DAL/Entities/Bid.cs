@@ -11,9 +11,8 @@ namespace Auction.DAL.Entities
 {
     public class Bid
     {
-        [Key]
-        [ForeignKey("Owner")]
-        public string Id { get; set; }
+       
+        public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public decimal Price { get; set; }
         
@@ -21,6 +20,8 @@ namespace Auction.DAL.Entities
         public int LotId { get; set; }
         public virtual Lot Lot { get; set; }
 
+
+        public virtual string OwnerId { get; set; }
         public virtual UserProfile Owner { get; set; }
 
         public Bid()

@@ -23,12 +23,19 @@ namespace Auction.Controllers
     {
         private IUserService UserService
         {
-            get { return HttpContext.GetOwinContext().GetUserManager<IUserService>(); }
+            get
+            {
+                
+                return HttpContext.GetOwinContext().GetUserManager<IUserService>();
+            }
         }
 
         private IAuthenticationManager AuthenticationManager
         {
-            get { return HttpContext.GetOwinContext().Authentication; }
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
         }
 
         public ActionResult Login()
@@ -41,7 +48,7 @@ namespace Auction.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login(LoginModel model)
         {
-           // await SetInitialDataAsync();
+            await SetInitialDataAsync();
 
             if (ModelState.IsValid)
             {
@@ -76,6 +83,14 @@ namespace Auction.Controllers
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult NotAutenticated()
+        {
+            LoginModel loginModel = new LoginModel();
+            loginModel.IsLoginDropDownOpened = true;
+            return RedirectToAction("Index", "Home", loginModel);
         }
 
         public ActionResult Register()

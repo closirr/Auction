@@ -45,11 +45,11 @@ namespace Auction.BLL.Services
             return bidsCount;
         }
 
-        public BidDTO Get(string bidId)
+        public BidDTO Get(int? bidId)
         {
             if (bidId == null)
                 throw new ArgumentNullException("bidId");
-            Bid bid = Database.Bids.Get(bidId);
+            Bid bid = Database.Bids.Get(bidId.Value);
             return Mapper.Map<BidDTO>(bid);
         }
 
@@ -64,8 +64,9 @@ namespace Auction.BLL.Services
             Database.Save();
         }
 
-        public void Remove(string bidId, string userId)
+        public void Remove(int? bidId, string userId)
         {
+            throw new NotImplementedException();
         }
     }
 }

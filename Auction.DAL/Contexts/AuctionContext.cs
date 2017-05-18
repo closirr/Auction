@@ -22,7 +22,7 @@ namespace Auction.DAL.Contexts
         }
         static AuctionContext()
         {
-            System.Data.Entity.Database.SetInitializer(new ContextInitialiser());
+            System.Data.Entity.Database.SetInitializer<AuctionContext>(null);
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Lot> Lots { get; set; }

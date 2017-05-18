@@ -18,7 +18,7 @@ namespace Auction.Controllers
             }
             return View( loginModel);
         }
-
+     
 
         [Authorize(Roles = "admin")]
         public ActionResult About()

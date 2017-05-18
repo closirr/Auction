@@ -23,7 +23,8 @@ namespace Auction.BLL.Infrastructure
         {
             Bind<IAuctionUnitOfWork>().To<AuctionUnitOfWork>().WithConstructorArgument(connectionString);
             Bind<IIdentityUnitOfWork>().To<IdentityUnitOfWork>().WithConstructorArgument(connectionString);
-
+            Configuration c = new Configuration();
+            
         }
     }
 }

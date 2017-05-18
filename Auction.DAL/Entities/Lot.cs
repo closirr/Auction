@@ -10,7 +10,7 @@ namespace Auction.DAL.Entities
 {
     public class Lot
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
@@ -20,7 +20,7 @@ namespace Auction.DAL.Entities
         public List<String> AdditionalPicturesPaths { get; set; }
         public Status Status { get; set; }
 
-        public string IdOwner { get; set; }
+        public string OwnerId { get; set; }
         public UserProfile Owner { get; set; }
         public virtual Category Category { get; set; }
         public virtual List<Bid> Bids { get; set; }

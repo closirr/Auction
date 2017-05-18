@@ -20,9 +20,10 @@ namespace Auction.BLL.Infrastructure
             CreateMap<ShippingData, ShippingDataDTO>().PreserveReferences();
             CreateMap<Lot, LotDTO>().PreserveReferences();
             CreateMap<StatusDTO, Status>();
-
             CreateMap<UserDTO, User>();
-               
+            CreateMap<UserProfile, UserProfileDTO>();
+            CreateMap<UserProfileDTO, UserProfile>();
+
 
             CreateMap<BidDTO, Bid>()
                 .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => Mapper.Map<UserProfile>(src.Owner)))

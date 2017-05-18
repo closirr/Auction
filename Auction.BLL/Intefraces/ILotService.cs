@@ -11,10 +11,10 @@ namespace Auction.BLL.Intefraces
     public interface ILotService
     {
         void Create(string userId, LotDTO lot);
-        void Remove(string lotId);
-        void MakeABid(string lotId, BidDTO bid);
-        LotDTO Get(string id);
-        void RemoveBid(string lotId, string bidId);
+        void Remove(int? lotId);
+        void MakeABid(int? lotId, BidDTO bid);
+        LotDTO Get(int? id);
+        void RemoveBid(int? lotId, int? bidId);
         IEnumerable<LotDTO> FindByName(string lotName);
         IEnumerable<LotDTO> GetAllInCategory(int? categoryId);
         IEnumerable<LotDTO> GetAll();

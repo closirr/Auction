@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 
-namespace Auction.Models
+namespace Auction.Models.Lot
 {
     public class LotListModel
     {

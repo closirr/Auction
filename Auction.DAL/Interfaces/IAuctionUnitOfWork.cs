@@ -9,9 +9,9 @@ namespace Auction.DAL.Interfaces
 {
     public interface IAuctionUnitOfWork : IDisposable
     {
-        IRepository<Lot,string> Lots { get; }
+        IRepository<Lot,int> Lots { get; }
         IRepository<Category,int> Categories { get; }
-        IRepository<Bid, string> Bids { get; }
+        IRepository<Bid, int> Bids { get; }
         IRepository<ShippingData, string> ShippingDatas { get; }
         IUserProfileManager UserProfile { get; }
 

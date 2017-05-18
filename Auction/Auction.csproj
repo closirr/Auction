@@ -226,10 +226,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705170721280_InitialModel.cs" />
-    <Compile Include="Migrations\201705170721280_InitialModel.Designer.cs">
-      <DependentUpon>201705170721280_InitialModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
@@ -382,11 +378,10 @@
       <Project>{9e53f2b0-90a5-4280-a91f-f7239453b499}</Project>
       <Name>Auction.BLL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705170721280_InitialModel.resx">
-      <DependentUpon>201705170721280_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Auction.DAL\Auction.DAL.csproj">
+      <Project>{f5a1ad5c-ebea-445b-bbe5-7671a25453e3}</Project>
+      <Name>Auction.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

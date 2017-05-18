@@ -21,10 +21,13 @@ namespace Auction.Util
             CreateMap<LotDTO, LotListModel>()
                 .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.Owner.Id))
                 .ForMember(dest => dest.BidCount, opt => opt.MapFrom(src => src.Bids.Count))
-                .ForMember(dest => dest.CurrentBidId,opt => opt.MapFrom(src => src.Bids.OrderBy(o => o.CreateDate).FirstOrDefault()));
-            CreateMap<LotCreateModel, LotDTO>()
-                .ForMember(dest => dest.CompletionDate, opt => opt.MapFrom(src => DateTime.Now.AddDays(Int32.Parse(src.TimeToComplete))));
+                .ForMember(dest => dest.CurrentBidId,
+                    opt => opt.MapFrom(src => src.Bids.OrderBy(o => o.CreateDate).FirstOrDefault()));
 
+
+            CreateMap<LotCreateModel, LotDTO>()
+                .ForMember(dest => dest.CompletionDate,
+                    opt => opt.MapFrom(src => DateTime.Now.AddDays(Int32.Parse(src.TimeToComplete))));
 
         }
     }

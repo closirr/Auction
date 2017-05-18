@@ -12,8 +12,8 @@ namespace Auction.BLL.Intefraces
     {
         IEnumerable<BidDTO> GetAllUserBids(string userId);
         int GetUserBidsCount(string userId);
-        BidDTO Get(string bidId);
+        BidDTO Get(int? bidId);
         void Create(BidDTO bid, string userId);
-        void Remove(string bidId, string userId);
+        void Remove(int? bidId, string userId);
     }
 }

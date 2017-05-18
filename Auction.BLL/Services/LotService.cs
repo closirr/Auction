@@ -42,7 +42,7 @@ namespace Auction.BLL.Services
             Mapper.Map<Bid>(new BidDTO());
             
             Mapper.Map<Status>(new StatusDTO());
-            lotDTO.IdOwner = userId;
+      //      lotDTO.IdOwner = userId;    //TODO remove comment
             Lot lot = Mapper.Map<Lot>(lotDTO);
 
             //lot.Owner = new User();
@@ -50,14 +50,14 @@ namespace Auction.BLL.Services
             Database.Save();
         }
 
-        public void Remove(string lotId)
+        public void Remove(int? lotId)
         {
             if(lotId == null)
                 throw new ArgumentNullException("lotId");
-            Database.Lots.Delete(lotId);
+            Database.Lots.Delete(lotId.Value);
         }
 
-        public void MakeABid(string lotId, BidDTO bid)
+        public void MakeABid(int? lotId, BidDTO bid)
         {
             if (bid == null)
                 throw new ArgumentNullException("bid");
@@ -65,39 +65,39 @@ namespace Auction.BLL.Services
                 throw new ArgumentNullException("lotId");
 
 
-            Lot lot = Database.Lots.Get(lotId);
+            Lot lot = Database.Lots.Get(lotId.Value);
             if (lot == null)
                 throw new ItemNotExistInDbException("lot", lotId.ToString());
             if (lot.Status != Status.Active)
-                throw new InaccessibleLotException("inactive lot", lot.Id);
+                throw new InaccessibleLotException("inactive lot", lot.Id.ToString());
 
             lot.Bids.Add(Mapper.Map<Bid>(bid));
         }
 
-        public LotDTO Get(string id)
+        public LotDTO Get(int? id)
         {
             if (id == null)
                 throw new ArgumentNullException("id");
             Lot lot = null;
-            lot = Database.Lots.Get(id);
+            lot = Database.Lots.Get(id.Value);
             if (lot == null)
                 throw new ItemNotExistInDbException("lot", id.ToString());
             return Mapper.Map<LotDTO>(lot);
         }
 
-        public void RemoveBid(string lotId, string bidId)
+        public void RemoveBid(int? lotId, int? bidId)
         {
             if (lotId == null)
                 throw new ArgumentNullException("lotId");
             if (bidId == null)
                 throw new ArgumentNullException("bidId");
 
-            Lot lot = Database.Lots.Get(lotId);
+            Lot lot = Database.Lots.Get(lotId.Value);
             if (lot == null)
-                throw new ItemNotExistInDbException("lot", lotId);
+                throw new ItemNotExistInDbException("lot", lotId.ToString());
             Bid bid = lot.Bids.Find(b => b.Id == bidId);
             if (bid == null)
-                throw new ItemNotExistInDbException("bid", bidId);
+                throw new ItemNotExistInDbException("bid", bidId.ToString());
             lot.Bids.Remove(bid);
         }
 

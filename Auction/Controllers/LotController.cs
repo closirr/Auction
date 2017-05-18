@@ -58,7 +58,7 @@ namespace Auction.Controllers
         public ActionResult Create()
         {
             LotCreateModel lotModel = new LotCreateModel() { Description = "asf", MainPicturePath = "asf", Name = "asf", Price = 12 };
-            lotModel.Datas.AddRange( new List<SelectListItem> {
+            lotModel.Datas.AddRange(new List<SelectListItem> {
                 new SelectListItem() {Text = "3 days", Value = "3"},
                 new SelectListItem() {Text = "7 days", Value = "7"},
                 new SelectListItem() {Text = "14 days", Value = "14"},

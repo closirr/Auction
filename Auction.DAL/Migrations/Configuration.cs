@@ -1,20 +1,22 @@
-
-namespace Auction.Migrations
+﻿namespace Auction
 {
-    using Auction.DAL.Contexts;
     using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AuctionContext>
+
+    public class Configuration : DbMigrationsConfiguration<Auction.DAL.Contexts.AuctionContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            MigrationsDirectory = @"Migrations\";
         }
 
-        protected override void Seed(AuctionContext context)
+        protected override void Seed(Auction.DAL.Contexts.AuctionContext context)
         {
             //  This method will be called after migrating to the latest version.
 
